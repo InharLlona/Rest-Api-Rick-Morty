@@ -37,6 +37,12 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
             rows={3}
             rowsMax={5}
           />
+          <span><b>Episodes this charater took part</b></span>
+          <ul>
+            {character.episode.map((char) => (
+            <a href={char}><li key={char}>{char}</li></a>
+            ))}
+          </ul>
           <Button type="submit" variant="contained" color="primary" >
             Save
           </Button>
