@@ -6,6 +6,7 @@ export interface Character {
   status: string;
   gender: string;
   comments:string;
+  episode:string[]
 }
 
 export const createEmptyHotel = (): Character => ({
@@ -16,4 +17,5 @@ export const createEmptyHotel = (): Character => ({
   status: '',
   gender: '',
   comments:'',
+  episode:[],
 });
