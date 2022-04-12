@@ -5,6 +5,7 @@ export interface Character {
   species: string;
   status: string;
   gender: string;
+  comments:string;
 }
 
 export const createEmptyHotel = (): Character => ({
@@ -14,4 +15,5 @@ export const createEmptyHotel = (): Character => ({
   species: '',
   status: '',
   gender: '',
+  comments:'',
 });

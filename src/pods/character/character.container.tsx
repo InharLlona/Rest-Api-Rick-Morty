@@ -12,26 +12,20 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
   const { id } = useParams();
   const history = useHistory();
 
-  // const handleLoadCityCollection = async () => {
-  //   const apiCities = await api.getCities();
-  //   setCities(apiCities);
-  // };
-
   const handleLoadCharacter = async () => {
-    const apiHotel = await api.getCharacter(id);
-    setCharacter(mapCharacterFromApiToVm(apiHotel));
+    const apiChars = await api.getCharacter(id);
+    setCharacter(mapCharacterFromApiToVm(apiChars));
   };
 
   React.useEffect(() => {
     if (id) {
       handleLoadCharacter();
     }
-    // handleLoadCityCollection();
   }, []);
 
   const handleSave = async (character: Character) => {
     const apiCharacter = mapCharacterFromVmToApi(character);
-    const success = await api.saveHotel(apiCharacter);
+    const success = await api.saveHotel(id,apiCharacter);
     if (success) {
       history.goBack();
     } else {
@@ -39,5 +33,5 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
     }
   };
 
-  return <CharacterComponent character={character} cities={cities} onSave={handleSave} />;
+  return <CharacterComponent character={character} onSave={handleSave} />;
 };
