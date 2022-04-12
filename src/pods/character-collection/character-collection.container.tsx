@@ -7,6 +7,7 @@ import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
   const { characterCollection, loadCharacterCollection } = useCharacterCollection();
+  // const [check, setCheck] = React.useState("ch");
   const history = useHistory();
 
   React.useEffect(() => {
@@ -22,11 +23,16 @@ export const CharacterCollectionContainer = () => {
     loadCharacterCollection();
   };
 
+  // const onCheck = (str) =>{
+  //  setCheck(str)
+  // }
+
   return (
     <CharacterCollectionComponent
       characterCollection={characterCollection}
       onEdit={handleEdit}
       onDelete={handleDelete}
+      // onCheck={onCheck}
     />
   );
 };

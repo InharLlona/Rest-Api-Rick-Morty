@@ -7,6 +7,12 @@ export const root = css`
   }
 `;
 
+export const button = css`
+    width:75px;
+    margin-right:10px; 
+    margin-bottom:10px; 
+`;
+
 export const list = css`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
