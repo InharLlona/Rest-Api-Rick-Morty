@@ -9,4 +9,14 @@ export const mapFromApiToVm = (character: apiModel.intChar): viewModel.Character
   address: character.created,
 });
 
+export const mapLocationFromApiToVm = (location: apiModel.intChar): viewModel.LocationEntityVm => ({
+  id: location.id,
+  name: location.name,
+});
+
+export const mapEpisodeFromApiToVm = (episode: apiModel.intChar): viewModel.EpisodeEntityVm => ({
+  id: episode.id,
+  name: episode.name,
+});
+
 

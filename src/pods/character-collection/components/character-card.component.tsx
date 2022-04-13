@@ -17,10 +17,11 @@ interface Props {
   char: CharacterEntityVm;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
+  editCancelled:string;
 }
 
 export const CharacterCard: React.FunctionComponent<Props> = (props) => {
-  const { char, onEdit, onDelete } = props;
+  const { char, onEdit, onDelete, editCancelled } = props;
 
   return (
     <Card>
@@ -42,12 +43,18 @@ export const CharacterCard: React.FunctionComponent<Props> = (props) => {
         </div>
       </CardContent>
       <CardActions>
-        <IconButton onClick={() => onEdit(char.id)}>
-          <EditIcon />
-        </IconButton>
-        <IconButton onClick={() => onDelete(char.id)}>
-          <DeleteIcon />
-        </IconButton>
+        {(editCancelled=="character")?<div>
+          <IconButton onClick={() => onEdit(char.id)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={() => onDelete(char.id)}>
+            <DeleteIcon />
+          </IconButton>
+        </div>:<div>
+          <IconButton onClick={() => onDelete(char.id)}>
+            <DeleteIcon />
+          </IconButton>
+        </div>}
       </CardActions>
     </Card>
   );

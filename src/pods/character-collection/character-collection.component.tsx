@@ -1,19 +1,20 @@
 import * as React from 'react';
-import { CharacterEntityVm } from './character-collection.vm';
+import { CharacterEntityVm , LocationEntityVm , EpisodeEntityVm } from './character-collection.vm';
 import { CharacterCard } from './components/character-card.component';
 import * as classes from './character-collection.styles';
 import Pagination from "material-ui-flat-pagination";
 
 interface Props {
-  characterCollection: CharacterEntityVm[];
+  characterCollection: CharacterEntityVm[] | LocationEntityVm [] | EpisodeEntityVm [] ;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
-  // onCheck: (str: string) => void;
+  onCheck: (str: string) => void;
+  searchingDetails:string;
 }
 
 export const CharacterCollectionComponent: React.FunctionComponent<Props> = (props) => {
 
-  const { characterCollection, onEdit, onDelete} = props;
+  const { characterCollection, onEdit, onDelete, onCheck, searchingDetails} = props;
 
   const [offset, setOffset] = React.useState(0);
   const [perPage] = React.useState(5);
@@ -21,30 +22,7 @@ export const CharacterCollectionComponent: React.FunctionComponent<Props> = (pro
   const [sliced1, setSliced1] = React.useState<CharacterEntityVm[]>([]);
   const [charName, setCharName] = React.useState("");
   const [filtered, setFiltered] = React.useState(false);
-  // const [bringCharacters, setBringCharacters] = React.useState(true);
-  // const [bringLocation, setBringLocations] = React.useState(false);
-  // const [bringEpisodes, setBringEpisodes] = React.useState(false);
-
-  // const changePriorities = (str:string) =>{
-  //   switch(str){
-  //     case "ch":
-  //       setBringCharacters(true)
-  //       setBringLocations(false)
-  //       setBringEpisodes(false)
-  //       break;
-  //     case "pl":
-  //       setBringCharacters(false)
-  //       setBringLocations(true)
-  //       setBringEpisodes(false)
-  //       break;
-  //     case "ep":
-  //       setBringCharacters(false)
-  //       setBringLocations(false)
-  //       setBringEpisodes(true)
-  //       break;
-  //   }
-  // }
-
+ 
   React.useEffect(() => {
     //let slice = []
     if(filtered){
@@ -73,20 +51,24 @@ export const CharacterCollectionComponent: React.FunctionComponent<Props> = (pro
     setOffset((page-1)*perPage)
   };
 
+  React.useEffect(() => {
+    setCharName("");
+  }, [searchingDetails])
+
   return (
     <div className={classes.root}>
       <div>
-        {/* <div>
-          <button className={classes.button} onClick={changePriorities("ch")}>Characters</button> 
-          <button className={classes.button} onClick={changePriorities("pl")}>Places</button> 
-          <button className={classes.button} onClick={changePriorities("ep")}>Episodes</button> 
-        </div> */}
+        <div>
+          <button className={classes.button} onClick={()=>onCheck("character")}>Characters</button> 
+          <button className={classes.button} onClick={()=>onCheck("location")}>Places</button> 
+          <button className={classes.button} onClick={()=>onCheck("episode")}>Episodes</button> 
+        </div>
       <input value={charName} onChange={(e) => setCharName(e.target.value)} placeholder="Filter by name"/>
       </div>
       <ul className={classes.list}>
         {sliced.map((char) => (
           <li key={char.id}>
-            <CharacterCard char={char} onEdit={onEdit} onDelete={onDelete} />
+            <CharacterCard char={char} onEdit={onEdit} onDelete={onDelete} editCancelled={searchingDetails} />
           </li>
         ))}
       </ul>

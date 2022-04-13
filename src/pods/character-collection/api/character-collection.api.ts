@@ -1,10 +1,10 @@
 import { HotelEntityApi } from './character-collection.api-model';
 import axios from 'axios'
 
-const url =`http://localhost:3000/api/results`
+const url =`https://rickandmortyapi.com/api/`
 
-export const getCharacterCollection = async (): Promise<HotelEntityApi[]> => {
-  const characterCollection = (await axios.get(url)).data
+export const getCharacterCollection = async (wth:string): Promise<HotelEntityApi[]> => {
+  const characterCollection = (await axios.get(`${url}${wth}`)).data
   return characterCollection;
 };
 

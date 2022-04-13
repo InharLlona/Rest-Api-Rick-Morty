@@ -6,13 +6,14 @@ import { useCharacterCollection } from './character-collection.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
-  const { characterCollection, loadCharacterCollection } = useCharacterCollection();
-  // const [check, setCheck] = React.useState("ch");
+
+  const [wth, setWht] = React.useState("character");
+  const { characterCollection, loadCharacterCollection } = useCharacterCollection(wth);
   const history = useHistory();
 
   React.useEffect(() => {
     loadCharacterCollection();
-  }, []);
+  }, [wth]);
 
   const handleEdit = (id: string) => {
     history.push(linkRoutes.editCharacter(id));
@@ -23,16 +24,17 @@ export const CharacterCollectionContainer = () => {
     loadCharacterCollection();
   };
 
-  // const onCheck = (str) =>{
-  //  setCheck(str)
-  // }
+  const onCheck = (str) =>{
+    setWht(str)
+  }
 
   return (
     <CharacterCollectionComponent
       characterCollection={characterCollection}
       onEdit={handleEdit}
       onDelete={handleDelete}
-      // onCheck={onCheck}
+      onCheck={onCheck}
+      searchingDetails={wth}
     />
   );
 };
