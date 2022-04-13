@@ -16,6 +16,10 @@ interface Props {
 export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
   const { character, onSave } = props;
 
+  const getEpisodeCharacters = ()=> {
+
+  }
+
   return (
     <Formik
       onSubmit={onSave}
@@ -40,7 +44,7 @@ export const CharacterComponent: React.FunctionComponent<Props> = (props) => {
           <span><b>Episodes this charater took part</b></span>
           <ul>
             {character.episode.map((char) => (
-            <a href={char}><li key={char}>{char}</li></a>
+            <a href={char}><li key={char} onClick={getEpisodeCharacters}>{char}</li></a>
             ))}
           </ul>
           <Button type="submit" variant="contained" color="primary" >
